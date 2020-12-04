@@ -13,3 +13,9 @@ Answer2: 451
 ## Day03
 
 Answer1: 148
+Answer2: 727923200
+
+## Day04
+
+Answer1: 230
+Answer2: 156
