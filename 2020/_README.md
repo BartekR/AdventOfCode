@@ -19,3 +19,8 @@ Answer2: 727923200
 
 Answer1: 230
 Answer2: 156
+
+## Day 05
+
+Answer1: 888
+Answer2: 522
