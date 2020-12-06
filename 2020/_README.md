@@ -24,3 +24,8 @@ Answer2: 156
 
 Answer1: 888
 Answer2: 522
+
+## Day06
+
+Answer1: 6551
+Answer2: 3358
