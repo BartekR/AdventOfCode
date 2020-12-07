@@ -33,4 +33,4 @@ Answer2: 3358
 ## Day07
 
 Answer1: 208
-Answer2:
+Answer2: 1664

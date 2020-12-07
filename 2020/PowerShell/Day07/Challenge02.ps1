@@ -1,4 +1,4 @@
-$bags = Get-Content "$PSScriptRoot\\bags0.txt"
+$bags = Get-Content "$PSScriptRoot\\bags.txt"
 
 function Get-Colours($line)
 {
@@ -7,7 +7,7 @@ function Get-Colours($line)
 
     $outerColour = $Matches['outerColour']
     $innerColours = $Matches['innerColours']
-    "outer colour: {0}, inner colours: {1}" -f $outerColour, $innerColours
+    #"outer colour: {0}, inner colours: {1}" -f $outerColour, $innerColours
 
     $innerColoursHash = @{}
     $innerColours -split ', ' | ForEach-Object {
@@ -27,56 +27,39 @@ function Get-Colours($line)
 $colours = @{}
 
 $bags | ForEach-Object {
-    #"--> {0}" -f $_
     $c = Get-Colours $_
-    #$c
     $colours[$c.outerColour] = $c.innerColours
 }
 
-function dig($colourHash, $level = 1)
+function dig($path, $pv, $colourHash, $level = 1)
 {
-    $prefix = ('-' * $level)
+    $p0 = $path
 
     $colourHash.Keys | Where-Object {$_ -ne 'no other bags'} | ForEach-Object {
-        "digging {0} {1} ({2})" -f $prefix, $_, [int]$colourHash[$_]
-        dig $colours[$_] ($level + 1)
-    }
-}
-
-function dig2($colourHash, $level = 1)
-{
-    if($null -ne $colourHash)
-    {
-        $prefix = ('-' * $level)
-
-        $colourHash.Keys | ForEach-Object {
-            "digging {0} {1} ({2})" -f $prefix, $_, [int]$colourHash[$_]
-            $x0 = dig2 $colours[$_] ($level + 1)
-            $x0
+        
+        $path = $p0 + ' (' + $pv + ') / ' + $_
+        
+        $a = dig $path ([int]$colourHash[$_] * [int]$pv) $colours[$_] ($level + 1)
+        
+        if($a)
+        {
+            "{0} [{1}] --> {2} * {3} == [{1}]" -f $path, ($pv * [int]$colourHash[$_]), $pv, [int]$colourHash[$_]
+            $numbers[$path] = ($pv * [int]$colourHash[$_])
+            $a
+        }
+        else
+        {
+            "{0} {1} --> {3} * {4} = [{2}]" -f $path, [int]$colourHash[$_], ($pv * [int]$colourHash[$_]), $pv, [int]$colourHash[$_]
+            $numbers[$path] = ($pv * [int]$colourHash[$_])
         }
     }
 }
 
-function dig3($colourHash, $level = 1)
-{
-    if($null -ne $colourHash)
-    {
-        $colourHash.Keys | ForEach-Object {
-            dig3 $colours[$_] ($level + 1)
-        }
-        return [int]$colourHash[$_]
-    }
-}
 
-
-#$colours.'shiny gold'
-dig $colours.'shiny gold'
+$numbers = @{}
+dig 'shiny gold' 1 $colours.'shiny gold'
 '---------------------'
-dig2 $colours.'shiny gold'
-'====================='
-dig3 $colours.'shiny gold'
-#$colours.'faded blue'
+#$numbers
+$numbers.Values | Measure-Object -Sum
+"Number of bags: {0}" -f ($numbers.Values | Measure-Object -Sum).Sum
 
-# $colours
-# '---'
-# $colours.'shiny gold'
