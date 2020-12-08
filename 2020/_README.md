@@ -34,3 +34,8 @@ Answer2: 3358
 
 Answer1: 208
 Answer2: 1664
+
+## Day08
+
+Answer1: 1810
+Answer2: 969
