@@ -39,3 +39,8 @@ Answer2: 1664
 
 Answer1: 1810
 Answer2: 969
+
+## Day09
+
+Answer1: 90433990
+Answer2: 11691646
