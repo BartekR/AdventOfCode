@@ -44,3 +44,8 @@ Answer2: 969
 
 Answer1: 90433990
 Answer2: 11691646
+
+## Day10
+
+Answer1: x
+Answer2: x
