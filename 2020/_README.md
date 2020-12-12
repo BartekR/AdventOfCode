@@ -47,5 +47,15 @@ Answer2: 11691646
 
 ## Day10
 
-Answer1: x
-Answer2: x
+Answer1: 2376
+Answer2: ?
+
+## Day11
+
+Answer1: 2211
+Answer2: 1995
+
+## Day12
+
+Answer1: 2847
+Answer2: 29839
