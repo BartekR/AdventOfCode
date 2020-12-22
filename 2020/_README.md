@@ -94,3 +94,18 @@ Answer2: ?
 
 Answer1: ?
 Answer2: ?
+
+## Day 20
+
+Answer1: ?
+Answer2: ?
+
+## Day 21
+
+Answer1: ?
+Answer2: ?
+
+## Day22
+
+Answer1: 32495
+Answer2: ?
