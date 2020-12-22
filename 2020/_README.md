@@ -74,3 +74,23 @@ Answer2" ?
 
 Answer1: 763
 Answer2: 1876406
+
+## Day16
+
+Answer1: ?
+Answer2: ?
+
+## Day17
+
+Answer1: ?
+Answer2: ?
+
+## Day18
+
+Answer1: ?
+Answer2: ?
+
+## Day19
+
+Answer1: ?
+Answer2: ?
