@@ -128,7 +128,7 @@ What is this permutation_map? How did he get it? As it's 1 to 5 element combinat
 
 I don't remove 4 elements, as it would break the max-3-jolts-distance rule. Adding the combinations (1 + 5 + 10 + 10) I get 26, so why ACProctor says it's 7?
 
-Because we have either 3-jolts gap or 1-jolt gap (as seen in the first solution - I got 33 1-jolt and 72 3-jolt ). When we analyse series, we have to retain the options, where both boundary values (1, 5) are present - to connect with the previous and following jolts that are 3-jolts gap away. So when we count all the ways with 1 and 5 element present we get 7 combinations.
+Because we have either 3-jolts gap or 1-jolt gap (as seen in the first solution - I got 33 1-jolt and 72 3-jolt ). When we analyse series, we have to retain the options, where both boundary values (1, 5) are present - to connect with the previous and following jolts that are 3-jolts gap away. So when we count all the ways with 1 and 5 element present we get 8 combinations. But - there is one exception: `1       5` combination - we have to remove it from the list, because `5 - 1 > 3`, so we can't use this option. Hence - we get 7 combinations.
 
 The same applies to 4 elements:
 
@@ -159,8 +159,7 @@ I don't remove 3 elements, as I would have no both boundaries (1, 4) present. To
 
 4 combinations in total, 2 of them hold boundary elements. For 2 elements and 1 element we have only 1 combinations each that hold boundary element(s).
 
-So - we have this array of permutations: [1, 1, 2, 4, 7]
-                               elements:  1  2  3  4  5
+So - we have this array of permutations: [1, 1, 2, 4, 7] for the series of elements: (1, 2, 3, 4, 5).
 
 ## Solution #2 (based on digtydoo's code)
 
