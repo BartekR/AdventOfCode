@@ -297,19 +297,19 @@ step. `adapter[jolts] == calculations + path(s)`
 1. `adapter[1] == adapter[0] + adapter[-1] + adapter[-2] == 1 + 0 + 0 == 1`
 
     ```cmd
-    path:  0 <- 1
+    path:  0 <- 1 (adapter[0])
     ```
 
 2. `adapter[4] == adapter[3] + adapter[2] + adapter[1] == 0 + 0 + 1 == 1`
 
     ```cmd
-    path:  0 <- 1 <- 4
+    path:  0 <- 1 <- 4 (adapter[1])
     ```
 
 3. `adapter[5] == adapter[4] + adapter[3] + adapter[2] == 1 + 0 + 0 == 1`
 
     ```cmd
-    path:  0 <- 1 <- 4 <- 5
+    path:  0 <- 1 <- 4 <- 5 (adapter[4])
     ```
 
 4. `adapter[6] == adapter[5] + adapter[4] + adapter[3] == 1 + 1 + 0 == 2`
