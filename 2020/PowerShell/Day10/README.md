@@ -161,6 +161,8 @@ I don't remove 3 elements, as I would have no both boundaries (1, 4) present. To
 
 So - we have this array of permutations: [1, 1, 2, 4, 7] for the series of elements: (1, 2, 3, 4, 5).
 
+The last thing is we have to multiply the permutations by the number of already found solutions.
+
 ## Solution #2 (based on digtydoo's code)
 
 >Python
@@ -220,7 +222,7 @@ Tribonacci:   0, 0, 1, 2,  4,  7, 13, 24, 44, ...
 Lazy caterer: 1, 2, 4, 7, 11, 16, 22, 29, 37, ...
 ```
 
-6 elements - let's stick just to combinations, that contain boundaries (1, 6) - meaning we can consider 1, 2, 3 and 4 elements combinations
+6 elements - let's stick just to combinations, that contain boundaries (1, 6) - meaning we can consider 1, 2 and 3 elements combinations. We can't remove 4 elements, as would stay only with the boundaries, and `6 - 1 > 3`.
 
 ```cmd
 1 2 3 4 5 6 <-- all elements (1 combination)
