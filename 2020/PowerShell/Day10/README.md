@@ -282,3 +282,120 @@ Total: 1 + 5 + 10 + 7 + 1 == 24. So - it's tribonacci.
 Still - I don't know why it works here. Maybe it's related to counting the previous 3 paths?
 
 One more example with dynamic programming - very well explained on YT by [hey_programmers](https://www.youtube.com/watch?v=_f8N7qo_5hA)
+
+### The trees
+
+The examples with the dynamic programming, solutions by jsut_ and digtydoo use trees and the summaries of paths for previous (or next) jolts. How does it work?
+
+The idea: for each next jolt we add values for positions [jolt - 1], [jolt - 2], [jolt - 3] (or [jolt + 1], [jolt + 2], [jolt + 3] like on YT video). Below are the steps in the calculation with the paths explanations.
+
+Example using (sorted) jolts: 1,4,5,6,7,10,11,12,15,16,19,(22) - 22 is the device, we don't use socket (0), we assume the value 1 for socket.
+
+step. `adapter[jolts] == calculations + path(s)`
+
+0. `adapter[0] == 1 (initial value)`
+1. `adapter[1] == adapter[0] + adapter[-1] + adapter[-2] == 1 + 0 + 0 == 1`
+
+    ```cmd
+    path:  0 <- 1
+    ```
+
+2. `adapter[4] == adapter[3] + adapter[2] + adapter[1] == 0 + 0 + 1 == 1`
+
+    ```cmd
+    path:  0 <- 1 <- 4
+    ```
+
+3. `adapter[5] == adapter[4] + adapter[3] + adapter[2] == 1 + 0 + 0 == 1`
+
+    ```cmd
+    path:  0 <- 1 <- 4 <- 5
+    ```
+
+4. `adapter[6] == adapter[5] + adapter[4] + adapter[3] == 1 + 1 + 0 == 2`
+
+    ``` cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 (adapter[5])
+           0 <- 1 <- 4      <- 6 (adapter[4])
+    ```
+
+5. `adapter[7] == adapter[6] + adapter[5] + adapter[4] == 2 + 1 + 1 == 4`
+
+    ```cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 <- 7 (adapter[6])
+           0 <- 1 <- 4      <- 6 <- 7 (adapter[6])
+           0 <- 1 <- 4 <- 5      <- 7 (adapter[5])
+           0 <- 1 <- 4           <- 7 (adapter[4])
+    ```
+
+6. `adapter[10] == adapter[9] + adapter[8] + adapter[7] == 0 + 0 + 4 == 4`
+
+    ```cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 (adapter[7])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 (adapter[7])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 (adapter[7])
+           0 <- 1 <- 4           <- 7 <- 10 (adapter[7])
+    ```
+
+7. `adapter[11] == adapter[10] + adapter[9] + adapter[8] == 4 + 0 + 0 == 4`
+
+    ```cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <- 11 (adapter[10])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <- 11 (adapter[10])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <- 11 (adapter[10])
+           0 <- 1 <- 4           <- 7 <- 10 <- 11 (adapter[10])
+    ```
+
+8. `adapter[12] == adapter[11] + adapter[10] + adapter[9] == 4 + 4 + 0 == 8`
+
+    ```cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <- 11 <- 12 (adapter[11])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <- 11 <- 12 (adapter[11])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <- 11 <- 12 (adapter[11])
+           0 <- 1 <- 4           <- 7 <- 10 <- 11 <- 12 (adapter[11])
+           0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <-    <- 12 (adapter[10])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <-    <- 12 (adapter[10])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <-    <- 12 (adapter[10])
+           0 <- 1 <- 4           <- 7 <- 10 <-    <- 12 (adapter[10])
+    ```
+
+9. `adapter[15] == adapter[14] + adapter[13] + adapter[12] == 0 + 0 + 8`
+
+    ```cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <- 11 <- 12 <- 15 (adapter[12])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <- 11 <- 12 <- 15 (adapter[12])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <- 11 <- 12 <- 15 (adapter[12])
+           0 <- 1 <- 4           <- 7 <- 10 <- 11 <- 12 <- 15 (adapter[12])
+           0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <-    <- 12 <- 15 (adapter[12])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <-    <- 12 <- 15 (adapter[12])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <-    <- 12 <- 15 (adapter[12])
+           0 <- 1 <- 4           <- 7 <- 10 <-    <- 12 <- 15 (adapter[12])
+    ```cmd
+
+10. `adapter[16] == adapter[15] + adapter[14] + adapter[13] == 8 + 0 + 0 == 8`
+
+    ```cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 (adapter[15])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 (adapter[15])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 (adapter[15])
+           0 <- 1 <- 4           <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 (adapter[15])
+           0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <-    <- 12 <- 15 <- 16 (adapter[15])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <-    <- 12 <- 15 <- 16 (adapter[15])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <-    <- 12 <- 15 <- 16 (adapter[15])
+           0 <- 1 <- 4           <- 7 <- 10 <-    <- 12 <- 15 <- 16 (adapter[15])
+    ```
+
+11. `adapter[19] == adapter[18] + adapter[17] + adapter[16] == 0 + 0 + 8 == 8`
+
+    ```cmd
+    paths: 0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 <- 19 (adapter[16])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 <- 19 (adapter[16])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 <- 19 (adapter[16])
+           0 <- 1 <- 4           <- 7 <- 10 <- 11 <- 12 <- 15 <- 16 <- 19 (adapter[16])
+           0 <- 1 <- 4 <- 5 <- 6 <- 7 <- 10 <-    <- 12 <- 15 <- 16 <- 19 (adapter[16])
+           0 <- 1 <- 4      <- 6 <- 7 <- 10 <-    <- 12 <- 15 <- 16 <- 19 (adapter[16])
+           0 <- 1 <- 4 <- 5      <- 7 <- 10 <-    <- 12 <- 15 <- 16 <- 19 (adapter[16])
+           0 <- 1 <- 4           <- 7 <- 10 <-    <- 12 <- 15 <- 16 <- 19 (adapter[16])
+    ```
+
+The answer: we can connect the adapters in 8 ways.
