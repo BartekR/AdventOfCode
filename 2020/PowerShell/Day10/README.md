@@ -8,7 +8,7 @@ After AoC 2020 finished I started looking how others did it. There were trees in
 * [by digtydoo](https://www.reddit.com/r/adventofcode/comments/ka8z8x/2020_day_10_solutions/gfcxuxf/?utm_source=reddit&utm_medium=web2x&context=3)
 * [by jsut_](https://www.reddit.com/r/adventofcode/comments/ka8z8x/2020_day_10_solutions/gfcaqju/?utm_source=reddit&utm_medium=web2x&context=3)
 
-I implemented them, and this description is for me to remember what and how. Solutions contain citations of the solutions, for documentation purposes.
+I implemented them, and this description is for me to remember what and how. Descriptions contain citations of the original solutions, for documentation purposes.
 
 ## Solution #1 (based on ACProctor code)
 
