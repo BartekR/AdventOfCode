@@ -85,7 +85,7 @@ function Get-Combinations3($adapters)
     "adapter: 0: 1"
     foreach($adapter in $adapters)
     {
-        # splitting to $p1, $p2, $p3 so it';'s easier to see the changes in the debugger
+        # splitting to $p1, $p2, $p3 so it's easier to see the changes in the debugger
         $p1 = ($null -eq $paths[[int]$adapter - 1] ? 0 : $paths[[int]$adapter - 1])
         $p2 = ($null -eq $paths[[int]$adapter - 2] ? 0 : $paths[[int]$adapter - 2])
         $p3 = ($null -eq $paths[[int]$adapter - 3] ? 0 : $paths[[int]$adapter - 3])
